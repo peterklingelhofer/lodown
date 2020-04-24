@@ -20,7 +20,7 @@ module.exports.identity = identity;
  *
  * @param {Value} value: Can be any input value.
  *
- * @return {Value}: Will output the datatype of the input value.
+ * @return {String}: Will output the datatype of the input value as a string.
  *
  */
 
@@ -48,8 +48,10 @@ module.exports.typeOf = typeOf;
 /**
  * first: Designed to return the first of a certain number of the inputted array elements.
  *
- * @param {Array} array: Input must be an array. Will output elements from this array.
+ * @param {Array} array: Input must be an array. Will output elements from this array. If input
+ * array argument is not an array, will return an empty array.
  * @param {Number} number: Input must be a number. Will output this amount of array elements.
+ * If this input number is not a positive number, the function will return an empty array.
  *
  * @return {Array}: Will output the number of array elements specified.
  *
@@ -74,8 +76,10 @@ module.exports.first = first;
 /**
  * last: Designed to return the last of a certain number of the inputted array elements.
  *
- * @param {Array} array: Input must be an array. Will output elements from this array.
+ * @param {Array} array: Input must be an array. Will output elements from this array. If input
+ * array argument is not an array, will return an empty array.
  * @param {Number} number: Input must be a number. Will output this amount of array elements.
+ * If this input number is not a positive number, the function will return an empty array.
  *
  * @return {Array}: Will output the number of array elements specified, taken from the end.
  *
@@ -104,6 +108,7 @@ module.exports.last = last;
  * @param {Value} value: Input can be any value. Will output index of array with this value.
  *
  * @return {Number}: Returns the first occurrence of index of array that houses the input value.
+ * Returns -1 if the element is not found.
  *
  */
 
@@ -126,7 +131,7 @@ module.exports.indexOf = indexOf;
  * @param {Array} array: Input must be an array. Will output whether this array has the input value.
  * @param {Value} value: Input can be any value. Will output if this value is in the input array.
  *
- * @return {Number}: Returns the true if input array has input value, false if not.
+ * @return {Boolean}: Returns the true if input array has input value, false if not.
  *
  */
 
@@ -146,10 +151,9 @@ module.exports.contains = contains;
  * action Function to each value in the collection.
  * 
  * @param {Array or Object} collection: The collection over which to iterate.
- * @param {Function} action: The Function to be applied to each value in the 
- * collection
+ * @param {Function} action: The Function that will be applied to each value in the 
+ * collection.
  * 
- * @return: Applies action to each value in the collection.
  */
 function each(collection, action) {
     if(Array.isArray(collection)) {
@@ -244,7 +248,7 @@ module.exports.map = map;
  * every value in the input array.
  * 
  * @param {Array} array: Input array to have the input property applied to.
- * @param {Property} property: Input property to be applied to each element in 
+ * @param {String} property: Input property string to be applied to each element in 
  * input array.
  * 
  * @return {Array}: Returns an array containing the value of input property
@@ -272,7 +276,8 @@ module.exports.pluck = pluck;
  * the collection.
  * 
  * @return {Boolean}: Returns true if every test passes true, returns false
- * if any test is false.
+ * if any test is false. Returns true for truthy results when no function is passed in.
+ * Returns false for falsy results when no function is passed in.
  */
  
  function every(collection, method) {
@@ -309,7 +314,8 @@ module.exports.every = every;
  * the collection.
  * 
  * @return {Boolean}: Returns false if every test passes false, returns true
- * if any test is true.
+ * if any test is true. Returns true for truthy results when no function is passed in.
+ * Returns false for falsy results when no function is passed in.
  */
  
  function some(collection, method) {
@@ -344,7 +350,8 @@ module.exports.some = some;
  * @param {Array} collection: Input array to have input function applied to it.
  * @param {Function} method: Input function to be applied to each element in
  * the input array.
- * @param {Number} seed: Starting value to act as the first "previous result".
+ * @param {Number, Array, or Object} seed: Starting value to act as the first 
+ * "previous result".
  * 
  * @return {Number}: Returns the return value of the final function call.
  */
@@ -370,3 +377,11 @@ module.exports.reduce = reduce;
  * 
  * @return {Object}: Returns the updated first object.
  */
+
+function extend(obj1, ...objs) {    
+// assign object properties from rest of object arguments after first object to first object
+  Object.assign(obj1, ...objs);
+// return updated first object
+  return obj1; 
+};
+module.exports.reduce = reduce;

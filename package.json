@@ -1,6 +1,6 @@
 {
   "name": "lodown-peterklingelhofer",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "my first library, lodash library",
   "main": "index.js",
   "directories": {
